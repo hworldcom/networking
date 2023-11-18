@@ -40,6 +40,7 @@ void TCPServer::run()
 
     while(true)
     {
+        std::cout << "listening"<< std::endl;
         //  create a listening socket
         int listening = CreateSocket();
         if (listening<0)
@@ -50,6 +51,8 @@ void TCPServer::run()
 
         if (!(client < 0))
         {
+            std::cout << "client connected"<< std::endl;
+
             close(listening);
 
             int bytesRecv = 0;
@@ -60,6 +63,9 @@ void TCPServer::run()
 
                 if (messageReceived != NULL)
                 {
+                    std::cout << "message received" << std::endl;
+                    std::cout << buf << std::endl;
+
                     messageReceived(this, client, std::string(buf,0,bytesRecv));
                 }
 
@@ -77,12 +83,12 @@ void TCPServer::cleanup()
 
 }
 
-int TCPServer::CreateSocket() 
+int TCPServer::CreateSocket()
 {
     //init();
 
     int listening = socket(AF_INET, SOCK_STREAM, 0); // AF_INET -- IPV4
-    if (listening == -1) 
+    if (listening == -1)
     {
         std::cerr << "Cant create a socket!";
         return -1;

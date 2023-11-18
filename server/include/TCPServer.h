@@ -4,6 +4,7 @@
 
 #define MAX_BUFFER_SIZE (49152)
 
+// forward declaration of class
 class TCPServer;
 
 //order:
@@ -14,7 +15,7 @@ class TCPServer;
 //      send back message
 // cleanup
 
-
+// callback to data received
 // message handler
 typedef void(*MessageReceivedHandler)(TCPServer* listener, int socketId, std::string msg);
 
@@ -36,7 +37,7 @@ public:
     // the main processing loop
     void run();
 
-    // send back message
+    // send back message to a specific client
     void send(int clientSocket, std::string msg);
 
     // cleanup
