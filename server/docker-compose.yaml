@@ -1,0 +1,25 @@
+version: '3'
+networks:
+  server:
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.5.0.0/24
+          gateway: 10.5.0.1
+
+services:
+  server-side:
+    container_name: listener
+    ports:
+      - 3306:3306
+    build:
+      context: .
+      dockerfile: infra/images/ci/Dockerfile
+    volumes:
+      - type: bind
+        source: "./"
+        target: /work
+    networks:
+      server:
+        ipv4_address: 10.5.0.5
+

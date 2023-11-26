@@ -52,6 +52,7 @@ private:
 
     // wait for a connection
     int WaitForConnection(int listening);
+    bool setnonblocking(int socketfd);
 
     std::string m_ipAddress;
     int m_port;
